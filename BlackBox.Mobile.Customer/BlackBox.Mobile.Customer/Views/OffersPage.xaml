@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BlackBox.Mobile.Customer.Views.OffersPage" 
+             Padding="15"
+             Title="Ofertas Disponíveis">
+  <RelativeLayout>
+    <StackLayout
+      RelativeLayout.WidthConstraint="{ ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1 }"
+      RelativeLayout.HeightConstraint="{ ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1 }">
+      <ListView x:Name="OffersListView" 
+                IsGroupingEnabled="true"
+                   GroupDisplayBinding="{ Binding Name }"
+                   GroupShortNameBinding ="{ Binding ShortName }">
+        <ListView.ItemTemplate>
+          <DataTemplate>
+            <ViewCell>
+              <StackLayout Orientation="Vertical" HeightRequest="70">
+                <Label Text="{Binding Label}"></Label>
+              </StackLayout>
+            </ViewCell>
+          </DataTemplate>
+        </ListView.ItemTemplate>
+      </ListView>
+    </StackLayout>
+  </RelativeLayout>
+</ContentPage>
