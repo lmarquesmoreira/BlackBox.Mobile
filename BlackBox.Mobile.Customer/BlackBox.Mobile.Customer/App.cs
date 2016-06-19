@@ -16,7 +16,7 @@ namespace BlackBox.Mobile.Customer
             MainPage = new NavigationPage(new Login())
             {
                 BarTextColor = Color.White,
-                BarBackgroundColor = Color.FromHex("#2B84D3"),
+                //BarBackgroundColor = Color.FromHex("#2B84D3"),
                 Title = "Meu BlackBox"
             };
         }
