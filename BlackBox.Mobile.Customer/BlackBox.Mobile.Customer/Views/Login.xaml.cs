@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using ApiHackaton.Entities;
 
 using Xamarin.Forms;
+using BlackBox.Mobile.Customer.ViewModel;
 
 namespace BlackBox.Mobile.Customer.Views
 {
@@ -15,43 +16,37 @@ namespace BlackBox.Mobile.Customer.Views
 
         private ApiService Service;
 
+
         public Login()
         {
             InitializeComponent();
-            Service = new ApiService();
+            Service = ApiService.GetInstance();
             Entrar.Clicked += Entrar_Clicked;
-
             BindingContext = this;
-            IsBusy = false;
-        }
-
-        private bool _isBusy;
-        public bool LoadingBusy
-        {
-            get { return _isBusy; }
-            set
-            {
-                _isBusy = value;
-                OnPropertyChanged();
-            }
         }
 
 
         private async void Entrar_Clicked(object sender, EventArgs e)
         {
-            LoadingBusy = true;
+            ProgressEntrando.IsVisible = true;
+            await this.FadeTo(0.1);
             var id = int.Parse(CustomerId.Text);
 
             var customer = await Service.GetCustomerById(id);
             if (customer != null)
             {
+                ProgressEntrando.IsVisible = false;
+                Service.PessoaCorrente = customer;
                 //verificar customerId
                 // navegar para outra pagina
                 await Navigation.PushAsync(new HomePage(customer));
-                LoadingBusy = false;
             }
             else
-                LoadingBusy = false;
+            {
+                await DisplayAlert("Erro ao entrar", "Verifique seu id", "Ok");
+                ProgressEntrando.IsVisible = false;
+            }
+            await this.FadeTo(1);
         }
     }
 }

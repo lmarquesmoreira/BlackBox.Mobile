@@ -1,23 +1,87 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="BlackBox.Mobile.Customer.Views.OffersPage" 
+             x:Class="BlackBox.Mobile.Customer.Views.OffersPage"
              Padding="15"
              Title="Ofertas Disponíveis">
+  <ContentPage.ToolbarItems>
+    <ToolbarItem Name="MeuCarrinho" Order="Primary" Priority="0">
+      <ToolbarItem.Icon>
+        <OnPlatform x:TypeArguments="FileImageSource"
+                    Android="ic_add_shopping_cart_white_48dp.png" />
+      </ToolbarItem.Icon>
+    </ToolbarItem>
+  </ContentPage.ToolbarItems>
   <RelativeLayout>
-    <StackLayout
-      RelativeLayout.WidthConstraint="{ ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1 }"
+    <StackLayout  RelativeLayout.WidthConstraint="{ ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1 }"
       RelativeLayout.HeightConstraint="{ ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1 }">
-      <ListView x:Name="OffersListView" 
+      <SearchBar x:Name="MeuSearchBar"
+                      Placeholder="Busque por uma oferta"
+                      Text="{Binding SearchText}"
+                      SearchCommand="{Binding SearchCommand}" ></SearchBar>
+
+      <ActivityIndicator x:Name="ProgressEntrando" Color="Blue" IsRunning="True" IsVisible="False" HeightRequest="50" WidthRequest="50" />
+
+      <ListView x:Name="OffersListView"
                 IsGroupingEnabled="true"
                    GroupDisplayBinding="{ Binding Name }"
-                   GroupShortNameBinding ="{ Binding ShortName }">
+                   GroupShortNameBinding ="{ Binding ShortName }" RowHeight="100">
         <ListView.ItemTemplate>
           <DataTemplate>
             <ViewCell>
-              <StackLayout Orientation="Vertical" HeightRequest="70">
-                <Label Text="{Binding Label}"></Label>
-              </StackLayout>
+              <Grid>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="96" />
+                  <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+
+                <Image Source="{ Binding ImageUrl }" WidthRequest="96" HeightRequest="96"/>
+                <StackLayout Grid.Column="1">
+                  <Label Text="{Binding Label}" ></Label>
+
+                  <Grid>
+                    <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="*" />
+                      <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Text="Preço: " FontAttributes="Bold" />
+                    <Label Text="{Binding Price}" Grid.Column="1" VerticalOptions="Center" />
+                  </Grid>
+
+
+                  <Grid>
+                    <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="*" />
+                      <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Text="Quantidade: " FontAttributes="Bold" />
+                    <Label Text="{Binding Quantity}" Grid.Column="1" VerticalOptions="Center"  />
+                  </Grid>
+                </StackLayout>
+
+
+              </Grid>
+            </ViewCell>
+          </DataTemplate>
+        </ListView.ItemTemplate>
+      </ListView>
+
+      <ListView x:Name="OffersResultListView" >
+        <ListView.ItemTemplate>
+          <DataTemplate>
+            <ViewCell>
+              <Grid>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="50" />
+                  <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Image Source="{ Binding ImageUrl }" WidthRequest="50" HeightRequest="50"/>
+                <StackLayout Grid.Column="1">
+                  <Label Text="{Binding Label}" ></Label>
+                </StackLayout>
+              </Grid>
             </ViewCell>
           </DataTemplate>
         </ListView.ItemTemplate>

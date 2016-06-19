@@ -2,17 +2,16 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BlackBox.Mobile.Customer.Views.Login"
-             xmlns:sys="clr-namespace:System;assembly=mscorlib" Title="Entrar em Meu BlackBox">
+             xmlns:sys="clr-namespace:System;assembly=mscorlib" Title="Entrar em Meu BlackBox"
+             xmlns:local="clr-namespace:BlackBox.Mobile.Customer.Custom;assembly=BlackBox.Mobile.Customer">
 
-  <ContentPage.Padding>
-    <OnPlatform x:TypeArguments="Thickness"
-                iOS="0, 20, 0, 0" />
-  </ContentPage.Padding>
-
-  <ActivityIndicator Color="Red" IsRunning="{Binding LoadingBusy}" IsVisible="{Binding LoadingBusy}" />
-  <StackLayout Padding="5" HorizontalOptions="Center" VerticalOptions="Center"  WidthRequest="300">
-    <Label FontSize="20" TextColor="#3498DB" Text="Entre com seu Id:"/>
-    <Entry x:Name="CustomerId" FontSize="Medium" TextColor="#3498DB" />
-    <Button x:Name="Entrar" Text="Entrar"/>
-  </StackLayout>
+  <ScrollView>
+    <!-- Colocar relative layout -->
+    <StackLayout Padding="5" HorizontalOptions="Center" VerticalOptions="Center"  WidthRequest="300">
+      <ActivityIndicator x:Name="ProgressEntrando" Color="Blue" IsRunning="True" IsVisible="False" HeightRequest="50" WidthRequest="50" />
+      <Label FontSize="20" TextColor="#3498DB" Text="Entre com seu Id:"/>
+      <Entry x:Name="CustomerId" FontSize="Medium"  Keyboard="Numeric" />
+      <Button x:Name="Entrar" Text="Entrar"/>
+    </StackLayout>
+  </ScrollView>
 </ContentPage>

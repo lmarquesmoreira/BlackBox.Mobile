@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BlackBox.Mobile.Customer.Views.MeuCarrinhoPage" Title="{Binding Label}" Padding="15">
+
+  <StackLayout>
+    <Button Text="Comprar Agora" x:Name="ComprarAgoraBtn"/>
+    <ActivityIndicator x:Name="ProgressEntrando" Color="Blue" IsRunning="True" IsVisible="False" HeightRequest="50" WidthRequest="50" />
+    <ListView x:Name="MeuCarrinhoListView" RowHeight="100">
+      <ListView.ItemTemplate>
+        <DataTemplate>
+          <ViewCell>
+            <Grid>
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="96" />
+                <ColumnDefinition Width="*" />
+              </Grid.ColumnDefinitions>
+              <Image Source="{ Binding Offer.ImageUrl }" WidthRequest="96" HeightRequest="96"/>
+              <StackLayout Grid.Column="1">
+                <Label Text="{Binding Offer.Label}" ></Label>
+
+                <Grid>
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                  </Grid.ColumnDefinitions>
+                  <Label Text="Preço: " FontAttributes="Bold" />
+                  <Label Text="{Binding Offer.Price}" Grid.Column="1" VerticalOptions="Center" />
+                </Grid>
+
+                <Grid>
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                  </Grid.ColumnDefinitions>
+                  <Label Text="Quantidade: " FontAttributes="Bold" />
+                  <Label Text="{Binding Offer.Quantity}" Grid.Column="1" VerticalOptions="Center"  />
+                </Grid>
+              </StackLayout>
+            </Grid>
+          </ViewCell>
+        </DataTemplate>
+      </ListView.ItemTemplate>
+    </ListView>
+  </StackLayout>
+
+  <!--
+   public Guid CartId { get; set; }
+        public int CustomerId { get; set; }
+        public List<DeviceOffer> DeviceOffers { get; set; }
+        public string Label { get; set; }
+  -->
+</ContentPage>

@@ -3,37 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:fab="clr-namespace:FAB.Forms;assembly=FAB.Forms"
              x:Class="BlackBox.Mobile.Customer.Views.HomePage"
-             Title="Meus Dispositivos"
+             Title="Meu BlackBox"
   	         Padding="15">
-  <RelativeLayout>
-    <StackLayout
-      RelativeLayout.WidthConstraint="{ ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1 }"
-      RelativeLayout.HeightConstraint="{ ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1 }">
-       <Button x:Name="AllOffersBtn" Text="Novo Carrinho"/>
-      <Label FontSize="24" Text="Seus dispositivos"></Label>
-      <ListView x:Name="DevicesListView"
-                   IsGroupingEnabled="true"
-                   GroupDisplayBinding="{ Binding Name }"
-                   GroupShortNameBinding ="{ Binding ShortName }"
-            >
-        <ListView.ItemTemplate>
-          <DataTemplate>
-            <ViewCell>
-              <StackLayout Orientation="Vertical">
-                <Label Text="{ Binding Id }"></Label>
-              </StackLayout>
-            </ViewCell>
-          </DataTemplate>
-        </ListView.ItemTemplate>
-      </ListView>
-      <fab:FloatingActionButton
-             x:Name="fabBtn"
-             Source="plus.png"
-             Size="Normal"
-             HeightRequest="20"
-             Clicked="Handle_FabClicked" IsVisible="True" IsEnabled="True"
-             RelativeLayout.XConstraint="{ ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant=-60 }"
-             RelativeLayout.YConstraint="{ ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant=-60 }" />
-    </StackLayout>
-  </RelativeLayout>
+  <StackLayout>
+    <Button x:Name="DispositivosBtn" Text="Meus Dispositivos" />
+    <Button x:Name="CarrinhoBtn" Text="Meus Carrinhos" />
+    <Button x:Name="OfertasBtn" Text="Ofertas Disponíveis" />
+  </StackLayout>
 </ContentPage>

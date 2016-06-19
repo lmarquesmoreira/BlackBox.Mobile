@@ -1,25 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="BlackBox.Mobile.Customer.Views.MyHistory"
-             Title=""
+             x:Class="BlackBox.Mobile.Customer.Views.MeusCarrinhos"
+             Title="Meus Carrinhos"
   	         Padding="15">
   <RelativeLayout>
     <StackLayout
      RelativeLayout.WidthConstraint="{ ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1 }"
      RelativeLayout.HeightConstraint="{ ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1 }">
-      <Label FontSize="24" Text="Seus dispositivos"></Label>
-      <!--<ListView x:Name="MyHistoryListView" >
+      <StackLayout>
+        <Label Text="Você não tem carrinhos cadastrados" />
+        <Button Text="Criar novo Carrinho" x:Name="NovoCarrinhoBtn"/>
+      </StackLayout>
+      <ListView x:Name="MeusCarrinhosListView" >
         <ListView.ItemTemplate>
           <DataTemplate>
             <ViewCell>
               <StackLayout Orientation="Vertical">
-                <Label Text="{Binding Id}"></Label>
+                <Label Text="{Binding Label}"></Label>
               </StackLayout>
             </ViewCell>
           </DataTemplate>
         </ListView.ItemTemplate>
-      </ListView>-->
+      </ListView>
     </StackLayout>
   </RelativeLayout>
 </ContentPage>

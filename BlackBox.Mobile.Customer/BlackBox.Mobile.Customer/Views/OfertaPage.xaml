@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BlackBox.Mobile.Customer.Views.OfertaPage"
+             Title="{ Binding Label }"
+             Padding="15">
+  <ContentPage.ToolbarItems>
+    <ToolbarItem Name="MeuCarrinho" Order="Primary" Priority="0">
+      <ToolbarItem.Icon>
+        <OnPlatform x:TypeArguments="FileImageSource"
+                    Android="ic_add_shopping_cart_white_48dp.png" />
+      </ToolbarItem.Icon>
+    </ToolbarItem>
+  </ContentPage.ToolbarItems>
+  <ContentPage.Content>
+    <ScrollView>
+      <StackLayout>
+        <Image Source="{ Binding ImageUrl }" WidthRequest="96" HeightRequest="96"/>
+        <Label Text="Descrição" />
+        <Label Text="{Binding Description}" VerticalOptions="Center" HorizontalOptions="Center" />
+        <Label Text="Preço" />
+        <Label Text="{Binding Price}" VerticalOptions="Center" HorizontalOptions="Center" />
+        <Label Text="Quantidade" />
+        <Label Text="{Binding Quantity}" VerticalOptions="Center" HorizontalOptions="Center" />
+        <Button x:Name="AddCarrinhoBtn" Text="Adicionar ao Carrinho" />
+        <Button x:Name="ComprarBtn" Text="Comprar agora" />
+      </StackLayout>
+    </ScrollView>
+  </ContentPage.Content>
+</ContentPage>
