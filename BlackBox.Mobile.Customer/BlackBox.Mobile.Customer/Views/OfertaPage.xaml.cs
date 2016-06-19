@@ -22,6 +22,7 @@ namespace BlackBox.Mobile.Customer.Views
             Service = ApiService.GetInstance();
             ComprarBtn.Clicked += ComprarBtn_Clicked;
             AddCarrinhoBtn.Clicked += AddCarrinhoBtn_Clicked;
+            Init();
         }
 
         private async void AddCarrinhoBtn_Clicked(object sender, EventArgs e)
@@ -39,8 +40,7 @@ namespace BlackBox.Mobile.Customer.Views
             }
 
         }
-        public async void NovoCarrinho
-            ()
+        public async void NovoCarrinho()
         {
             var name = await InputBox(this.Navigation);
             if (!string.IsNullOrEmpty(name))
@@ -134,5 +134,36 @@ namespace BlackBox.Mobile.Customer.Views
             // then proc returns the result
             return tcs.Task;
         }
+
+        private void Init()
+        {
+            MeuCarrinho.Clicked += MeuCarrinho_Clicked;
+            MeuHome.Clicked += MeuHome_Clicked;
+        }
+
+
+        private async void MeuHome_Clicked(object sender, System.EventArgs e)
+        {
+            await Navigation.PushAsync(new HomePage(Service.PessoaCorrente));
+        }
+
+        private async void MeuCarrinho_Clicked(object sender, System.EventArgs e)
+        {
+            if (string.IsNullOrEmpty(Service.CarrinhoCorrente.Label))
+            {
+                var name = await InputBox(this.Navigation);
+                if (!string.IsNullOrEmpty(name))
+                {
+                    // checar carrinho
+                    Service.CarrinhoCorrente.Label = name;
+                    Service.CarrinhoCorrente.DeviceOffers = new List<DeviceOffer>();
+                    await Navigation.PushAsync(new OffersPage());
+                }
+            }
+            else
+                await Navigation.PushAsync(new MeuCarrinhoPage(Service.CarrinhoCorrente));
+
+        }
+
     }
 }

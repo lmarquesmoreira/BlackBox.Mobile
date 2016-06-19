@@ -24,22 +24,38 @@ namespace BlackBox.Mobile.Customer.Views
             ComprarAgoraBtn.Clicked += ComprarAgoraBtn_Clicked;
             ProgressEntrando.IsVisible = false;
 
+            MeuHome.Clicked += MeuHome_Clicked;
         }
 
         private async void ComprarAgoraBtn_Clicked(object sender, EventArgs e)
         {
-            ProgressEntrando.IsVisible = true;
-            var result = await Service.ComprarMuitos(Model);
-            if (result)
+            if (Model.DeviceOffers.Count != 0)
             {
-                await DisplayAlert("Compra", "Compra Efetuada com Sucesso!", "Ok");
-                Service.CarrinhoCorrente = new AuthorizedModel() { DeviceOffers = new List<DeviceOffer>() };
-                await Navigation.PushAsync(new HomePage(Service.PessoaCorrente));
+                ProgressEntrando.IsVisible = true;
+                var result = await Service.ComprarMuitos(Model);
+                if (result)
+                {
+                    await DisplayAlert("Compra", "Compra Efetuada com Sucesso!", "Ok");
+                    Service.CarrinhoCorrente = new AuthorizedModel() { DeviceOffers = new List<DeviceOffer>() };
+                    await Navigation.PushAsync(new HomePage(Service.PessoaCorrente));
+                }
+                else
+                    await DisplayAlert("Compra", "Ocorreu um erro, tente novamente!", "Ok");
+
+                ProgressEntrando.IsVisible = false;
             }
             else
-                await DisplayAlert("Compra", "Ocorreu um erro, tente novamente!", "Ok");
-
-            ProgressEntrando.IsVisible = false;
+            {
+                await DisplayAlert("Aviso", "Você não tem nenhuma oferta no seu carrinho, escolha alguma para confirmar a compra!", "Ok");
+                await Navigation.PushAsync(new OffersPage());
+            }
         }
+
+
+        private async void MeuHome_Clicked(object sender, System.EventArgs e)
+        {
+            await Navigation.PushAsync(new HomePage(Service.PessoaCorrente));
+        }
+
     }
 }

@@ -5,10 +5,16 @@
              Title="{ Binding Label }"
              Padding="15">
   <ContentPage.ToolbarItems>
-    <ToolbarItem Name="MeuCarrinho" Order="Primary" Priority="0">
+    <ToolbarItem x:Name="MeuCarrinho"  Command="{Binding MeuCarrinhoCommand}" Order="Primary" Priority="0">
       <ToolbarItem.Icon>
         <OnPlatform x:TypeArguments="FileImageSource"
                     Android="ic_add_shopping_cart_white_48dp.png" />
+      </ToolbarItem.Icon>
+    </ToolbarItem>
+    <ToolbarItem x:Name="MeuHome"  Command="{Binding MeuHomeCommand}" Order="Primary" Priority="0">
+      <ToolbarItem.Icon>
+        <OnPlatform x:TypeArguments="FileImageSource"
+                    Android="ic_action_action_account_balance.png" />
       </ToolbarItem.Icon>
     </ToolbarItem>
   </ContentPage.ToolbarItems>

@@ -4,6 +4,14 @@
              x:Class="BlackBox.Mobile.Customer.Views.MeusCarrinhos"
              Title="Meus Carrinhos"
   	         Padding="15">
+  <ContentPage.ToolbarItems>
+    <ToolbarItem x:Name="MeuHome" Order="Primary" Priority="0">
+      <ToolbarItem.Icon>
+        <OnPlatform x:TypeArguments="FileImageSource"
+                    Android="ic_action_action_account_balance.png" />
+      </ToolbarItem.Icon>
+    </ToolbarItem>
+  </ContentPage.ToolbarItems>
   <RelativeLayout>
     <StackLayout
      RelativeLayout.WidthConstraint="{ ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1 }"

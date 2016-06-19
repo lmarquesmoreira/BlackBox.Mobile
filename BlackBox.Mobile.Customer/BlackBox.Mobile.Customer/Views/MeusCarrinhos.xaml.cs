@@ -26,6 +26,13 @@ namespace BlackBox.Mobile.Customer.Views
 
             MeusCarrinhosListView.ItemTapped += MeusCarrinhosListView_ItemTapped;
             NovoCarrinhoBtn.Clicked += NovoCarrinhoBtn_Clicked;
+
+            MeuHome.Clicked += MeuHome_Clicked;
+        }
+
+        private async void MeuHome_Clicked(object sender, System.EventArgs e)
+        {
+            await Navigation.PushAsync(new HomePage(Service.PessoaCorrente));
         }
 
         private async void NovoCarrinhoBtn_Clicked(object sender, EventArgs e)
@@ -71,7 +78,7 @@ namespace BlackBox.Mobile.Customer.Views
         {
             var models = await Service.GetCarrinhos(Customer.Id);
 
-            if (Service.CarrinhoCorrente.DeviceOffers.Count() > 0)
+            if (!string.IsNullOrEmpty(Service.CarrinhoCorrente.Label))
                 models.Add(Service.CarrinhoCorrente);
 
             ViewModel.Carrinhos = models;
